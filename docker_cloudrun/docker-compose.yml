@@ -1,0 +1,9 @@
+version: "3"
+services:
+  app:
+    platform: linux/amd64 # for M1 Mac
+    ports:
+      - "3050:8080"
+    build:
+      context: ..
+      dockerfile: docker_cloudrun/Dockerfile

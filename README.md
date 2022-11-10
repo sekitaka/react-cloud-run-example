@@ -1,3 +1,59 @@
+This repository is an example to run react app on Cloud Run.
+
+# Create GCP Project
+1. Create GCP project
+2. Enable Cloud Run 
+3. Create Cloud Run service
+4. Choose your container image url
+5. Submit to create Cloud RUn Service
+
+## Artifact Registry
+4. Enable Artifact Registry
+5. Create GCR.io Repository
+
+
+us-docker.pkg.dev/YOUR_ID/gcr.io
+gcr.io/YOUR_ID
+
+# How to deploy container
+
+```
+npm build
+cd PROJECT_ROOT
+
+# Build
+docker build  -f docker_cloudrun/Dockerfile --tag gcr.io/YOUR_ID/gcr.io/reactcloudrun:latest .
+# Build (on M1)
+docker buildx build --platform linux/arm64 -f docker_cloudrun/Dockerfile --tag gcr.io/YOUR_ID/gcr.io/reactcloudrun:latest .
+
+
+# Once
+gcloud auth configure-docker
+
+docker push gcr.io/YOUR_ID/gcr.io/reactcloudrun:latest 
+
+# If you need login
+gcloud auth login
+```
+
+
+# Trouble Shooting
+## Port error
+Cloud Run console shows this error.
+```
+The user-provided container failed to start and listen on the port defined provided by the PORT=8080 environment variable. Logs for this revision might contain more information.
+```
+Container log is here.
+```
+terminated: Application failed to start: Failed to create init process: failed to load /docker-entrypoint.sh: exec format error
+```
+
+The reason is that I build container image on M1 Mac, But Cloud Run environment is not amd64. I had to specify architecture. 
+
+-----------------------------------
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
