@@ -11,7 +11,7 @@ This repository is an example to run react app on Cloud Run.
 # Create Artifact Registry for container image
 1. Enable Artifact Registry 
 2. Create GCR.io Repository.
-   The repository url likes this `gcr.io/api-6819121969308683875-7979/gcr.io`
+   The repository url likes this `gcr.io/YOUR_PROJECT_ID/gcr.io`
 3. Deploy container image
 
 # How to deploy container image
@@ -28,11 +28,11 @@ gcloud auth login
 
 # Build container image including react app built
 ## Build image on Intel Mac
-docker build -f docker_cloudrun/Dockerfile --tag gcr.io/api-6819121969308683875-7979/gcr.io/reactcloudrun:latest .
-docker push gcr.io/api-6819121969308683875-7979/gcr.io/reactcloudrun:latest
+docker build -f docker_cloudrun/Dockerfile --tag gcr.io/YOUR_PROJECT_ID/gcr.io/reactcloudrun:latest .
+docker push gcr.io/YOUR_PROJECT_ID/gcr.io/reactcloudrun:latest
 
 ## Build image and push it to registry directry on M1
-docker buildx build --no-cache --push --platform=linux/amd64 -f docker_cloudrun/Dockerfile --tag gcr.io/api-6819121969308683875-7979/gcr.io/reactcloudrun:latest .
+docker buildx build --no-cache --push --platform=linux/amd64 -f docker_cloudrun/Dockerfile --tag gcr.io/YOUR_PROJECT_ID/gcr.io/reactcloudrun:latest .
 
 # References
 https://everythingdevops.dev/building-x86-images-on-an-apple-m1-chip/
